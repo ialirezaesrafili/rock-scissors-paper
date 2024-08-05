@@ -1,4 +1,5 @@
 class PlayerInfo:
+    """create base class for player and opponents"""
     def __init__(self, player_name: str, player_choice: str = None, player_score: int = 0):
         self.player_name = player_name
         self.player_choice = player_choice
