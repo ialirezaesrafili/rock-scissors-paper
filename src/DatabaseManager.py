@@ -4,25 +4,24 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # SQLAlchemy config
 Base = declarative_base()
-db_path = os.path.join(os.path.dirname(__file__), "game.sqlite")
-engine = sa.create_engine(f"sqlite:///{db_path}")
 
 
 class DatabaseManager:
     """Manage and interaction with SQL based on ORM"""
 
-    def __init__(self, engine):
+    def __init__(self, engine, db_path):
+        self.db_path = db_path
         self.engine = engine
         self.Session = sessionmaker(bind=self.engine)
         self.check_or_create_db()
 
     def check_or_create_db(self):
-        """Check if database exists, and create it if it does not."""
-        if not os.path.exists(db_path):
-            print("Database does not exist. Creating a new one.")
+        """Check if database exists, and create it if it does not"""
+        if not os.path.exists(self.db_path):
+            print("Database does not exist. Creating a new one")
             Base.metadata.create_all(self.engine)
         else:
-            print("Database already exists. Ensuring schema is up-to-date.")
+            print("Database already exists. Ensuring schema is up-to-date")
             Base.metadata.create_all(self.engine)
 
     def ensure_player_exists(self, player_name):
@@ -35,12 +34,30 @@ class DatabaseManager:
                 session.commit()
 
     def get_player_score(self, player_name):
-        """Get the player's score from the database."""
+        """Get the player's score from the database"""
         with self.Session() as session:
             player = session.query(Player).filter_by(name=player_name).first()
             if player:
                 return player.score
             return 0
+
+    def add_game_result(self, player_name, opponent_name, winner_name):
+        """Add game results to the database"""
+        with self.Session() as session:
+            result = GameResult(player_name=player_name, opponent_name=opponent_name, winner_name=winner_name)
+            session.add(result)
+            session.commit()
+
+    def add_or_update_player(self, player_name):
+        """Add a new player to the database or update their score"""
+        with self.Session() as session:
+            player = session.query(Player).filter_by(name=player_name).first()
+            if player:
+                player.score += 1
+            else:
+                player = Player(name=player_name, score=1)
+                session.add(player)
+            session.commit()
 
 
 class GameResult(Base):
