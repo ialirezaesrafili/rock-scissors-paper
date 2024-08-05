@@ -49,12 +49,24 @@ class Game:
 
 
 class GameController:
+    """Controlling entire game process"""
     def __init__(self, db_manager):
         self.db_manager = db_manager
 
     def select_game_mode(self):
         """ setup mode for player to choose """
-        pass
+        print("""+ 1 + Single Round """)
+        print("""+ 2 + Best of Three """)
+        print("""+ 3 + Best of Five """)
+        print("""+ 4 + Best of Seven """)
+        while True:
+            try:
+                mode = int(input("Enter the number of the mode: "))
+                if mode in [m for m in range(1, 5)]:
+                    return mode
+                print("Invalid selection. Please choose a number between 1 and 4")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
     def play_game(self):
         pass
