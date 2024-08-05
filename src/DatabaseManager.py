@@ -1,5 +1,6 @@
 import os
 import sqlalchemy as sa
+from prettytable import PrettyTable
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # SQLAlchemy config
@@ -58,6 +59,28 @@ class DatabaseManager:
                 player = Player(name=player_name, score=1)
                 session.add(player)
             session.commit()
+
+    def print_leaderboard(self):
+        """Print the leaderboard using PrettyTable"""
+        with self.Session() as session:
+            players = session.query(Player).order_by(Player.score.desc()).all()
+            table = PrettyTable()
+            table.field_names = ["ID", "Player Name", "Score"]
+            for player in players:
+                table.add_row([player.id, player.name, player.score])
+            print("\nLeaderboard:")
+            print(table)
+
+    def print_game_results(self):
+        """Print the previous game results using PrettyTable"""
+        with self.Session() as session:
+            results = session.query(GameResult).order_by(GameResult.id).all()
+            table = PrettyTable()
+            table.field_names = ["ID", "Player Name", "Opponent Name", "Winner Name"]
+            for result in results:
+                table.add_row([result.id, result.player_name, result.opponent_name, result.winner_name])
+            print("\nPrevious Game Results:")
+            print(table)
 
 
 class GameResult(Base):
