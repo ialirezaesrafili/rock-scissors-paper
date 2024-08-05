@@ -46,3 +46,43 @@ class Game:
         # Update the winner's score in the players table
         if winner != "Tie":
             self.db_manager.add_or_update_player(winner)
+
+
+class GameController:
+    def __init__(self, db_manager):
+        self.db_manager = db_manager
+
+    def select_game_mode(self):
+        """ setup mode for player to choose """
+        pass
+
+    def play_game(self):
+        pass
+
+    def show_main_menu(self):
+        """Show the main menu options for the game."""
+        while True:
+            print(
+                """
+     +-+-+-+-+-+-+-+ +-+-+-+-+-+ +-+-+-+-+
+     |S|C|I|S|S|O|R| |P|A|P|E|R| |R|O|C|K|
+     +-+-+-+-+-+-+-+ +-+-+-+-+-+ +-+-+-+-+
+                """
+            )
+            print("""+ 1 + Show Leaderboard""")
+            print("""+ 2 + Show Previous Game Results""")
+            print("""+ 3 + Start a New Game""")
+            print("""+ 4 + Exit """)
+
+            choice = input("Enter your choice: ").strip()
+
+            if choice == "1":
+                self.db_manager.print_leaderboard()
+            elif choice == "2":
+                self.db_manager.print_game_results()
+            elif choice == "3":
+                self.play_game()
+            elif choice == "4":
+                break
+            else:
+                print("Invalid choice. Please select a valid option.")
