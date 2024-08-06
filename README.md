@@ -20,6 +20,8 @@ This repository contains a Rock, Paper, Scissors game implemented in Python with
 
 - Python 3.x
 - SQLite
+- SQLAlchemy
+- prettytable
 
 ### Installation
 
