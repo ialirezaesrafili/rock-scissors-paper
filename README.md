@@ -26,8 +26,7 @@ This repository contains a Rock, Paper, Scissors game implemented in Python with
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/rock-paper-scissors-game.git
-    cd rock-paper-scissors-game
+    git clone https://github.com/ialirezaesrafili/rock-scissors-paper.git
     ```
 
 2. Install required Python packages:
