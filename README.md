@@ -97,7 +97,7 @@ Represents a game result with player names and the winner.
 **Example Usage:**
 
 ```python
-result = GameResult(player_name="player", opponent_name="Bob", winner_name="Alice")
+result = GameResult(player_name="player1", opponent_name="player2", winner_name="player2")
 ```
 
 #### `Player` Class
@@ -192,8 +192,8 @@ The main script initializes the database manager and game controller, then displ
 **Example Script:**
 
 ```python
-if __name__ == "__main__":
-    db_manager = DatabaseManager(engine)
-    game_controller = GameController(db_manager)
-    game_controller.show_main_menu()
+    if __name__ == "__main__":
+        db_manager = DatabaseManager(engine, db_path)
+        game_controller = GameController(db_manager)
+        game_controller.show_main_menu()
 ```
