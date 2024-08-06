@@ -1,21 +1,49 @@
-# rock-scissors-paper
-This "Rock, Paper, Scissors" game is a Python console app using SQLAlchemy for ORM
 
+# Rock, Paper, Scissors Game with Database Integration
 
-## PlayerInfo Class
+## Overview
 
----
+This repository contains a Rock, Paper, Scissors game implemented in Python with a SQLite database backend. The game tracks player scores and game results using SQLAlchemy for ORM (Object-Relational Mapping) and PrettyTable for displaying results in a tabular format.
 
-The `PlayerInfo` class manages player data in the game. 
+## Features
 
-### Attributes
-- **`player_name`** (str): The name of the player.
-- **`player_choice`** (str, optional): The choice made by the player (default is `None`).
-- **`player_score`** (int, default is `0`): The score of the player.
+- Track player scores and game results.
+- Print leaderboard and previous game results.
+- Play different game modes (Single Round, Best of Three, Best of Five, Best of Seven).
+- Ensure the database schema is up-to-date.
+- Add new players or update existing player scores.
+- Display results in a readable table format using PrettyTable.
 
-### Methods
-- **`get_info()`**: Returns a list with the player's name, choice, and score.
-- **`get_choice()`**: Retrieves the current choice of the player.
-- **`set_choice(choice)`**: Sets the player's choice to the specified value.
-- **`get_score()`**: Retrieves the player's score.
-- **`update_score()`**: Updates the player's score based on the game's logic.
+## Setup
+
+### Prerequisites
+
+- Python 3.x
+- SQLite
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/yourusername/rock-paper-scissors-game.git
+    cd rock-paper-scissors-game
+    ```
+
+2. Install required Python packages:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+### Configuration
+
+The game uses a SQLite database named `game.sqlite` stored in the same directory as the script.
+
+## Usage
+
+To start the game, run the `main.py` script:
+
+```bash
+python main.py
+```
